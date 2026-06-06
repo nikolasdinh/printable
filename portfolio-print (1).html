@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Nikolas Dinh — Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════
+   PRINT SETUP
+═══════════════════════════════════════════════ */
+@page {
+  size: 8.5in 11in;
+  margin: 0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:      #111111;
+  --mid:      #555555;
+  --soft:     #888888;
+  --faint:    #bbbbbb;
+  --rule:     #dddddd;
+  --bg:       #ffffff;
+  --green:    #1E4D2B;   /* CPP green — used for accents */
+  --gold:     #c98c0e;   /* CPP gold — used sparingly */
+  --sans:     'DM Sans', system-ui, sans-serif;
+  --serif:    'DM Serif Display', Georgia, serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: #e8e8e8;   /* grey gaps between pages on screen */
+  color: var(--ink);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── PAGE SHELL ── */
+.page {
+  width: 8.5in;
+  min-height: 11in;
+  background: var(--bg);
+  margin: 0.3in auto;
+  padding: 0.55in 0.65in 0.5in;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  page-break-after: always;
+  break-after: page;
+}
+.page:last-child { page-break-after: avoid; }
+
+/* screen: no grey bg, no shadow, no margin */
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; min-height: 11in; }
+}
+
+/* ── SHARED: PAGE HEADER (top bar) ── */
+.pg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.1in;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0.28in;
+}
+.pg-header-label {
+  font-size: 8px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--soft);
+}
+.pg-num {
+  font-size: 8px; font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--soft);
+}
+
+/* ── SHARED: PAGE FOOTER ── */
+.pg-footer {
+  margin-top: auto;
+  padding-top: 0.12in;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pg-footer-name {
+  font-size: 8px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--soft);
+}
+.pg-footer-info {
+  font-size: 8px; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ── SHARED: SECTION LABEL ── */
+.sec-label {
+  font-size: 8px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 5px;
+}
+
+/* ── SHARED: RULE LABEL ── */
+.rule-label {
+  font-size: 8px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--soft);
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--rule);
+}
+
+
+/* ═══════════════════════════════════════════════
+   PAGE 1 — COVER
+═══════════════════════════════════════════════ */
+.cover {
+  justify-content: space-between;
+}
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 0.1in;
+  border-bottom: 1px solid var(--rule);
+}
+.cover-top-label {
+  font-size: 8px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--soft);
+}
+.cover-badge {
+  border: 1px solid var(--ink);
+  padding: 5px 7px;
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.5;
+}
+.cover-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 0.1in;
+}
+.cover-eyebrow {
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.14in;
+}
+.cover-name {
+  font-family: var(--sans);
+  font-size: 86pt;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 0.15in;
+}
+.cover-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13pt;
+  color: var(--mid);
+  line-height: 1.45;
+  max-width: 4in;
+}
+.cover-infobar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+  padding-top: 0.15in;
+  gap: 0;
+}
+.cover-info-cell {
+  padding-right: 0.2in;
+  border-right: 1px solid var(--rule);
+  padding-left: 0.15in;
+}
+.cover-info-cell:first-child { padding-left: 0; }
+.cover-info-cell:last-child { border-right: none; }
+.cover-info-label {
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--soft); margin-bottom: 4px;
+}
+.cover-info-val {
+  font-size: 10px; font-weight: 500;
+  color: var(--ink);
+}
+
+
+/* ═══════════════════════════════════════════════
+   PAGE 2 — CONTENTS
+═══════════════════════════════════════════════ */
+.contents-title {
+  font-family: var(--sans);
+  font-size: 44pt; font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.25in;
+}
+.contents-list { flex: 1; }
+.contents-row {
+  display: flex;
+  align-items: baseline;
+  padding: 0.1in 0;
+  border-bottom: 1px solid var(--rule);
+  gap: 0.15in;
+}
+.contents-num {
+  font-size: 9px; font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  width: 0.2in; flex-shrink: 0;
+}
+.contents-body { flex: 1; }
+.contents-title-text {
+  font-size: 11pt; font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.contents-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 9pt;
+  color: var(--soft);
+}
+.contents-pg {
+  font-size: 8.5px; font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+  white-space: nowrap;
+}
+
+
+/* ═══════════════════════════════════════════════
+   PAGE 3 — ABOUT
+═══════════════════════════════════════════════ */
+/* Top zone: hero image + text side by side */
+.about-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22in;
+  flex: 1;
+}
+.about-top {
+  display: grid;
+  grid-template-columns: 2.1in 1fr;
+  gap: 0.28in;
+}
+
+/* Primary portrait */
+.about-photo-primary {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #f0f0f0;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.about-photo-primary img { width: 100%; height: 100%; object-fit: cover; }
+.about-photo-ph { font-size: 8px; color: var(--faint); text-align: center; }
+
+/* Info table below the primary photo */
+.about-info-grid { display: flex; flex-direction: column; gap: 0; margin-top: 0.12in; }
+.about-info-row {
+  display: grid; grid-template-columns: 0.65in 1fr;
+  gap: 0;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.about-info-row:first-child { border-top: 1px solid var(--rule); }
+.about-info-key {
+  font-size: 7px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--soft); padding-top: 1px;
+}
+.about-info-val { font-size: 8.5pt; color: var(--ink); }
+
+/* Right column: text content */
+.about-right {}
+.about-greeting {
+  font-size: 26pt; font-weight: 700;
+  letter-spacing: -0.02em; line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 0.12in;
+}
+.about-greeting span { color: var(--green); }
+.about-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 10.5pt;
+  color: var(--mid);
+  line-height: 1.55;
+  border-left: 2.5px solid var(--green);
+  padding-left: 0.12in;
+  margin-bottom: 0.14in;
+}
+.about-bio {
+  font-size: 9pt;
+  color: var(--mid);
+  line-height: 1.65;
+  margin-bottom: 0.14in;
+}
+.about-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.18in;
+}
+.about-col-title {
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--soft); margin-bottom: 0.08in;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.about-col ul { list-style: none; }
+.about-col li {
+  font-size: 8.5pt; color: var(--mid);
+  padding: 3.5px 0;
+  display: flex; align-items: flex-start; gap: 6px;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--rule);
+}
+.about-col li::before { content: '—'; color: var(--faint); flex-shrink: 0; margin-top: 1px; }
+
+/* Photo gallery strip at the bottom */
+.about-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.1in;
+}
+.about-gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.about-gallery-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #f0f0f0;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.about-gallery-img img { width: 100%; height: 100%; object-fit: cover; }
+.about-gallery-cap {
+  font-size: 7px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--soft);
+  text-align: center;
+}
+
+
+/* ═══════════════════════════════════════════════
+   PAGES 4–9 — PROJECT PAGES
+═══════════════════════════════════════════════ */
+.proj-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.1in;
+}
+.proj-number-label {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--green);
+}
+.proj-meta-inline {
+  display: grid; grid-template-columns: repeat(4, auto);
+  gap: 0;
+}
+.proj-meta-cell { padding: 0 0.12in; border-left: 1px solid var(--rule); }
+.proj-meta-cell:first-child { border-left: none; padding-left: 0; }
+.proj-meta-key {
+  font-size: 7px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--soft); margin-bottom: 2px;
+}
+.proj-meta-val { font-size: 8.5pt; font-weight: 500; color: var(--ink); }
+
+.proj-title-row {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.08in 0;
+  margin-bottom: 0.18in;
+}
+.proj-page-title {
+  font-size: 30pt; font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+/* two-column body */
+.proj-body {
+  display: grid;
+  grid-template-columns: 3.2in 1fr;
+  gap: 0.25in;
+  flex: 1;
+}
+.proj-left {}
+.proj-right {}
+
+/* main image */
+.proj-main-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #f0f0f0;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  margin-bottom: 0.1in;
+  display: flex; align-items: center; justify-content: center;
+}
+.proj-main-img img { width: 100%; height: 100%; object-fit: contain; }
+.proj-main-img .ph { font-size: 8px; color: var(--faint); }
+
+/* sub images */
+.proj-sub-imgs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.08in;
+  margin-bottom: 0.12in;
+}
+.proj-sub-img {
+  aspect-ratio: 4/3;
+  background: #f0f0f0;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.proj-sub-img img { width: 100%; height: 100%; object-fit: contain; }
+.proj-sub-img .ph { font-size: 7px; color: var(--faint); }
+
+/* text sections */
+.proj-section { margin-bottom: 0.12in; }
+.proj-section-label {
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--soft); margin-bottom: 4px;
+}
+.proj-section p, .proj-section-text {
+  font-size: 8.5pt; color: var(--mid);
+  line-height: 1.6;
+}
+
+/* at a glance bullets */
+.glance-list { list-style: none; margin-bottom: 0.14in; }
+.glance-list li {
+  font-size: 8.5pt; color: var(--mid);
+  padding: 3.5px 0;
+  display: flex; align-items: flex-start; gap: 6px;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.4;
+}
+.glance-list li:first-child { border-top: 1px solid var(--rule); }
+.glance-list li::before { content: '—'; color: var(--faint); flex-shrink: 0; }
+
+/* results grid */
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--rule);
+  margin-bottom: 0.14in;
+}
+.result-cell {
+  padding: 8px 10px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.result-cell:nth-child(even) { border-right: none; }
+.result-cell:last-child, .result-cell:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+.result-val {
+  font-size: 18pt; font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.result-label {
+  font-size: 7px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--soft);
+}
+
+/* stack tags */
+.stack-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 0.14in; }
+.stack-tag {
+  font-size: 7.5px; font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border: 1px solid var(--rule);
+  color: var(--mid);
+}
+
+/* learned */
+.learned-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 9pt; color: var(--mid);
+  line-height: 1.55;
+}
+
+
+/* ═══════════════════════════════════════════════
+   PAGE 10 — MORE PROJECTS
+═══════════════════════════════════════════════ */
+.more-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.18in;
+  flex: 1;
+}
+.more-card {
+  border: 1px solid var(--rule);
+  padding: 0.14in;
+}
+.more-card-img {
+  width: 100%; aspect-ratio: 4/3;
+  background: #f0f0f0;
+  border: 1px solid var(--rule);
+  margin-bottom: 0.09in;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.more-card-img img { width: 100%; height: 100%; object-fit: contain; }
+.more-card-img .ph { font-size: 7px; color: var(--faint); }
+.more-card-cat {
+  font-size: 7px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--green); margin-bottom: 3px;
+}
+.more-card-title {
+  font-size: 10pt; font-weight: 600;
+  color: var(--ink); margin-bottom: 4px;
+  line-height: 1.2;
+}
+.more-card-desc { font-size: 8pt; color: var(--mid); line-height: 1.5; }
+
+
+/* ═══════════════════════════════════════════════
+   PAGE 11 — CONTACT / SKILLS
+═══════════════════════════════════════════════ */
+.contact-name {
+  font-size: 42pt; font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--ink); margin-bottom: 0.05in;
+}
+.contact-tagline {
+  font-family: var(--serif); font-style: italic;
+  font-size: 12pt; color: var(--mid);
+  margin-bottom: 0.25in;
+}
+.contact-two-col {
+  display: grid;
+  grid-template-columns: 2.5in 1fr;
+  gap: 0.35in;
+  flex: 1;
+}
+.contact-info-block { margin-bottom: 0.22in; }
+.contact-info-title {
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--soft); margin-bottom: 0.1in;
+  padding-bottom: 0.06in; border-bottom: 1px solid var(--rule);
+}
+.contact-info-row {
+  display: grid; grid-template-columns: 0.7in 1fr;
+  padding: 4px 0; border-bottom: 1px solid var(--rule);
+  font-size: 9pt;
+}
+.contact-info-key { color: var(--soft); font-size: 8pt; }
+.contact-info-val { color: var(--ink); }
+
+.skills-section { margin-bottom: 0.2in; }
+.skills-title {
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--soft); margin-bottom: 0.1in;
+  padding-bottom: 0.06in; border-bottom: 1px solid var(--rule);
+}
+.skills-grid-2 {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.12in;
+}
+.skill-group-name {
+  font-size: 8pt; font-weight: 600; color: var(--ink); margin-bottom: 4px;
+}
+.skill-group-items { font-size: 8pt; color: var(--mid); line-height: 1.6; }
+
+</style>
+</head>
+<body>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 1 — COVER
+     ✏️ EDIT: name, subtitle tagline, info bar values
+═══════════════════════════════════════════ -->
+<div class="page cover">
+
+  <div class="cover-top">
+    <!-- ✏️ EDIT: left label -->
+    <span class="cover-top-label">Engineering Portfolio</span>
+    <div class="cover-badge">SELECTED<br>WORKS<br>2025–<br>2026</div>
+  </div>
+
+  <div class="cover-main">
+    <!-- ✏️ EDIT: eyebrow label -->
+    <div class="cover-eyebrow">A Portfolio of Selected Engineering Work</div>
+    <!-- ✏️ EDIT: your name — line break wherever looks good -->
+    <div class="cover-name">Nikolas<br>Dinh.</div>
+    <!-- ✏️ EDIT: tagline — keep it one or two lines, ideally a bit personal -->
+    <div class="cover-sub">Mechanical engineering student. Built with curiosity,<br>SolidWorks, and the occasional ANSYS crash.</div>
+  </div>
+
+  <!-- ✏️ EDIT: the four info cells at the bottom -->
+  <div class="cover-infobar">
+    <div class="cover-info-cell">
+      <div class="cover-info-label">Discipline</div>
+      <div class="cover-info-val">Mechanical Eng.</div>
+    </div>
+    <div class="cover-info-cell">
+      <div class="cover-info-label">School</div>
+      <div class="cover-info-val">Cal Poly Pomona</div>
+    </div>
+    <div class="cover-info-cell">
+      <div class="cover-info-label">Edition</div>
+      <div class="cover-info-val">v1.0 — 2026</div>
+    </div>
+    <div class="cover-info-cell">
+      <div class="cover-info-label">Contact</div>
+      <div class="cover-info-val">nikolasdinh5@gmail.com</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 — CONTENTS
+     ✏️ EDIT: update page numbers if pages shift
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">Contents</span>
+    <span class="pg-num">002</span>
+  </div>
+
+  <div class="sec-label">Index</div>
+  <div class="contents-title">Contents.</div>
+
+  <div class="contents-list">
+    <div class="contents-row">
+      <span class="contents-num">01</span>
+      <div class="contents-body">
+        <div class="contents-title-text">About Me</div>
+        <div class="contents-sub">Who I am, what I build, and what I do outside the shop.</div>
+      </div>
+      <span class="contents-pg">p. 003</span>
+    </div>
+    <div class="contents-row">
+      <span class="contents-num">02</span>
+      <div class="contents-body">
+        <div class="contents-title-text">Project — FSAE Rear Beam Wing</div>
+        <div class="contents-sub">21+ CFD simulations, ~5 lb downforce increase, 18-page technical report.</div>
+      </div>
+      <span class="contents-pg">p. 004</span>
+    </div>
+    <div class="contents-row">
+      <span class="contents-num">03</span>
+      <div class="contents-body">
+        <div class="contents-title-text">Project — CNC Router</div>
+        <div class="contents-sub">Arduino-coded 2-axis router with tool changer, under $200.</div>
+      </div>
+      <span class="contents-pg">p. 005</span>
+    </div>
+    <div class="contents-row">
+      <span class="contents-num">04</span>
+      <div class="contents-body">
+        <div class="contents-title-text">Project — Winch Sled</div>
+        <div class="contents-sub">30m pull in 1.43 sec, $23 under budget, 2:1 pulley system.</div>
+      </div>
+      <span class="contents-pg">p. 006</span>
+    </div>
+    <div class="contents-row">
+      <span class="contents-num">05</span>
+      <div class="contents-body">
+        <div class="contents-title-text">Project — Knife Design &amp; Fabrication</div>
+        <div class="contents-sub">A2 tool steel, 51.5 HRC, 13.65 kN bending load, fastest slicing time in class.</div>
+      </div>
+      <span class="contents-pg">p. 007</span>
+    </div>
+    <div class="contents-row">
+      <span class="contents-num">06</span>
+      <div class="contents-body">
+        <div class="contents-title-text">Project — HVAC Cost Modeling</div>
+        <div class="contents-sub">1000+ data points, MATLAB + NOAA thermal model for California AC costs.</div>
+      </div>
+      <span class="contents-pg">p. 008</span>
+    </div>
+    <div class="contents-row">
+      <span class="contents-num">07</span>
+      <div class="contents-body">
+        <div class="contents-title-text">Project — Candy Crushing Device</div>
+        <div class="contents-sub">Full design process, Fusion 360 CAD assembly, GD&amp;T drawings.</div>
+      </div>
+      <span class="contents-pg">p. 009</span>
+    </div>
+    <div class="contents-row">
+      <span class="contents-num">08</span>
+      <div class="contents-body">
+        <div class="contents-title-text">More Projects</div>
+        <div class="contents-sub">Wooden ice cooler, car cost program, Evo 9 bracket, Raspberry Pi.</div>
+      </div>
+      <span class="contents-pg">p. 010</span>
+    </div>
+    <div class="contents-row">
+      <span class="contents-num">09</span>
+      <div class="contents-body">
+        <div class="contents-title-text">Contact &amp; Skills</div>
+        <div class="contents-sub">Get in touch.</div>
+      </div>
+      <span class="contents-pg">p. 011</span>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — Engineering Portfolio</span>
+    <span class="pg-footer-info">002 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 3 — ABOUT ME
+     ✏️ EDIT: photo, bio text, skills lists
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">01 — About</span>
+    <span class="pg-num">003</span>
+  </div>
+
+  <div class="about-layout">
+
+    <!-- Top: primary photo left, text right -->
+    <div class="about-top">
+      <div>
+        <div class="about-photo-primary">
+          <!-- ✏️ EDIT: replace with <img src="assets/your-photo.jpg" alt="Nikolas Dinh"> -->
+          <span class="about-photo-ph">Add photo here<br>assets/photo.jpg</span>
+        </div>
+        <!-- ✏️ EDIT: your personal details -->
+        <div class="about-info-grid">
+          <div class="about-info-row"><span class="about-info-key">Name</span><span class="about-info-val">Nikolas Dinh</span></div>
+          <div class="about-info-row"><span class="about-info-key">School</span><span class="about-info-val">Cal Poly Pomona</span></div>
+          <div class="about-info-row"><span class="about-info-key">Studying</span><span class="about-info-val">Mechanical Eng.</span></div>
+          <div class="about-info-row"><span class="about-info-key">Based</span><span class="about-info-val">Buena Park, CA</span></div>
+          <div class="about-info-row"><span class="about-info-key">Email</span><span class="about-info-val">nikolasdinh5@gmail.com</span></div>
+          <div class="about-info-row"><span class="about-info-key">Phone</span><span class="about-info-val">909-636-7988</span></div>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="sec-label">01 — About</div>
+        <!-- ✏️ EDIT: greeting -->
+        <div class="about-greeting">Hello, I'm Nikolas<br><span>Dinh.</span></div>
+        <!-- ✏️ EDIT: pull quote -->
+        <div class="about-quote">CFD, fabrication, and embedded systems — if you give me a free weekend and access to a shop, this is what happens.</div>
+        <!-- ✏️ EDIT: bio paragraph -->
+        <div class="about-bio">Mechanical engineering student at Cal Poly Pomona with a 3.5 GPA and a background that spans aerodynamics, hands-on fabrication, and embedded systems programming. I've spent five years wrenching on cars professionally while working through engineering coursework, which means I care as much about whether something actually works as whether it looks good on paper.</div>
+
+        <div class="about-two-col">
+          <!-- ✏️ EDIT: left skills column -->
+          <div class="about-col">
+            <div class="about-col-title">What I Do</div>
+            <ul>
+              <li>CAD &amp; simulation — SolidWorks, ANSYS Fluent, Fusion 360</li>
+              <li>Fabrication — welding, 3D printing, machining</li>
+              <li>Embedded systems — Arduino, Raspberry Pi</li>
+              <li>Programming — MATLAB, Python, C++</li>
+            </ul>
+          </div>
+          <!-- ✏️ EDIT: right interests column -->
+          <div class="about-col">
+            <div class="about-col-title">Outside the Shop</div>
+            <ul>
+              <li>Auto mechanics — Team Automotive, 5+ years</li>
+              <li>Project cars — Mitsubishi Evo 9</li>
+              <li>SolidWorks CSWP certified</li>
+              <li>Expected graduation: 2027</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: photo gallery strip (4 slots) -->
+    <!-- ✏️ EDIT: replace each placeholder with <img src="assets/photo-X.jpg" alt="..."> and update captions -->
+    <div class="about-gallery">
+      <div class="about-gallery-item">
+        <div class="about-gallery-img"><span class="about-photo-ph">assets/about-1.jpg</span></div>
+        <div class="about-gallery-cap">In the shop</div>
+      </div>
+      <div class="about-gallery-item">
+        <div class="about-gallery-img"><span class="about-photo-ph">assets/about-2.jpg</span></div>
+        <div class="about-gallery-cap">FSAE team</div>
+      </div>
+      <div class="about-gallery-item">
+        <div class="about-gallery-img"><span class="about-photo-ph">assets/about-3.jpg</span></div>
+        <div class="about-gallery-cap">Project car</div>
+      </div>
+      <div class="about-gallery-item">
+        <div class="about-gallery-img"><span class="about-photo-ph">assets/about-4.jpg</span></div>
+        <div class="about-gallery-cap">Add caption</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — About</span>
+    <span class="pg-footer-info">003 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 — PROJECT: FSAE BEAM WING
+     ✏️ EDIT: all text sections, images, result numbers
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">02 — Project 01</span>
+    <span class="pg-num">004</span>
+  </div>
+
+  <div class="proj-header-row">
+    <div class="proj-number-label">PROJECT 01 · 2025</div>
+    <div class="proj-meta-inline">
+      <div class="proj-meta-cell"><div class="proj-meta-key">Role</div><div class="proj-meta-val">Aero Engineer</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Team</div><div class="proj-meta-val">CPP FSAE</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Duration</div><div class="proj-meta-val">Oct – Dec 2025</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Status</div><div class="proj-meta-val">Concluded</div></div>
+    </div>
+  </div>
+
+  <div class="proj-title-row">
+    <div class="proj-page-title">FSAE Rear Beam Wing</div>
+  </div>
+
+  <div class="proj-body">
+    <div class="proj-left">
+      <!-- ✏️ EDIT IMAGE: replace ph div with <img src="assets/fsae.jpg" alt="..."> inside the div -->
+      <div class="proj-main-img"><img src="assets/fsae.jpg" alt="FSAE Beam Wing"></div>
+      <div class="proj-sub-imgs">
+        <div class="proj-sub-img"><img src="assets/fsae-1.jpg" alt="CFD pressure contour"></div>
+        <div class="proj-sub-img"><img src="assets/fsae-2.jpg" alt="Wing model"></div>
+      </div>
+      <!-- ✏️ EDIT: problem and approach paragraphs -->
+      <div class="proj-section">
+        <div class="proj-section-label">The Problem</div>
+        <p class="proj-section-text">CPP's FSAE vehicle needed more rear downforce without upsetting the aero balance. The question was whether a rear beam wing could deliver meaningful downforce gain within the constrained package size, or whether wake interference would cancel the benefit.</p>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">My Approach</div>
+        <p class="proj-section-text">Selected NACA airfoil geometries and built a full-car CFD model in ANSYS Fluent to evaluate downforce, drag, and wake behavior across 21+ simulation iterations. Results were documented in an 18-page technical report and presented to the full team for a go/no-go decision.</p>
+      </div>
+    </div>
+
+    <div class="proj-right">
+      <!-- ✏️ EDIT: at-a-glance bullets — 3 to 5 short bullets -->
+      <div class="rule-label">At a Glance</div>
+      <ul class="glance-list">
+        <li>~5 lb downforce increase from wing + undertray improvements</li>
+        <li>21+ CFD simulations in ANSYS Fluent and SolidWorks</li>
+        <li>Wake interference identified as primary limiting factor</li>
+        <li>18-page technical report; presented to 50+ teammates</li>
+        <li>Concluded beam wing incoherent with current aero package goals</li>
+      </ul>
+
+      <!-- ✏️ EDIT: result values and labels — 4 cells, 2×2 grid -->
+      <div class="rule-label">Results</div>
+      <div class="results-grid">
+        <div class="result-cell"><div class="result-val">~5 lb</div><div class="result-label">Downforce gain</div></div>
+        <div class="result-cell"><div class="result-val">21+</div><div class="result-label">CFD simulations</div></div>
+        <div class="result-cell"><div class="result-val">18 pg</div><div class="result-label">Technical report</div></div>
+        <div class="result-cell"><div class="result-val">50+</div><div class="result-label">Presented to</div></div>
+      </div>
+
+      <!-- ✏️ EDIT: tech stack tags -->
+      <div class="rule-label">Stack</div>
+      <div class="stack-tags">
+        <span class="stack-tag">ANSYS Fluent</span>
+        <span class="stack-tag">SolidWorks</span>
+        <span class="stack-tag">CFD</span>
+        <span class="stack-tag">NACA Airfoil</span>
+      </div>
+
+      <!-- ✏️ EDIT: what you learned — keep to 2-3 sentences -->
+      <div class="rule-label">What I Learned</div>
+      <div class="learned-text">Wake interference is a bigger constraint than wing geometry at FSAE scale. A correct answer isn't always "build it" — the most valuable outcome was a well-supported decision not to proceed.</div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — FSAE Rear Beam Wing</span>
+    <span class="pg-footer-info">004 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 5 — PROJECT: CNC ROUTER
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">03 — Project 02</span>
+    <span class="pg-num">005</span>
+  </div>
+
+  <div class="proj-header-row">
+    <div class="proj-number-label">PROJECT 02 · 2026</div>
+    <div class="proj-meta-inline">
+      <div class="proj-meta-cell"><div class="proj-meta-key">Role</div><div class="proj-meta-val">Solo Build</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Team</div><div class="proj-meta-val">1 Engineer</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Duration</div><div class="proj-meta-val">Apr 2026 – Present</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Status</div><div class="proj-meta-val">Working Prototype</div></div>
+    </div>
+  </div>
+
+  <div class="proj-title-row">
+    <div class="proj-page-title">CNC Router</div>
+  </div>
+
+  <div class="proj-body">
+    <div class="proj-left">
+      <div class="proj-main-img"><img src="assets/cnc.jpg" alt="CNC Router"></div>
+      <div class="proj-sub-imgs">
+        <div class="proj-sub-img"><img src="assets/cnc-1.jpg" alt="CNC assembly"></div>
+        <div class="proj-sub-img"><img src="assets/cnc-2.jpg" alt="CNC electronics"></div>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">The Problem</div>
+        <p class="proj-section-text">Access to a CNC router for hobby and coursework use is expensive. The goal was to build a functional 2-axis machine from scratch capable of drilling and light routing, under a $200 total budget.</p>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">My Approach</div>
+        <p class="proj-section-text">Belt-driven NEMA 17 steppers on both axes guided by V-wheel linear rails. Arduino firmware parses G-code and drives the motors with configurable acceleration profiles. A tool changer mechanism allows drill bit swaps without manual intervention.</p>
+      </div>
+    </div>
+
+    <div class="proj-right">
+      <div class="rule-label">At a Glance</div>
+      <ul class="glance-list">
+        <li>Arduino-coded 2-axis CNC router on a 3.4×7.8 in bed</li>
+        <li>Belt-driven NEMA 17 steppers + V-wheel linear motion</li>
+        <li>Automated drill bit tool changer</li>
+        <li>Full build under $200 budget</li>
+      </ul>
+
+      <div class="rule-label">Results</div>
+      <div class="results-grid">
+        <div class="result-cell"><div class="result-val">$200</div><div class="result-label">Total build cost</div></div>
+        <div class="result-cell"><div class="result-val">2-axis</div><div class="result-label">CNC motion</div></div>
+        <div class="result-cell"><div class="result-val">Auto</div><div class="result-label">Tool changer</div></div>
+        <div class="result-cell"><div class="result-val">G-code</div><div class="result-label">Control input</div></div>
+      </div>
+
+      <div class="rule-label">Stack</div>
+      <div class="stack-tags">
+        <span class="stack-tag">Arduino</span>
+        <span class="stack-tag">NEMA 17</span>
+        <span class="stack-tag">Belt Drive</span>
+        <span class="stack-tag">V-Wheel</span>
+        <span class="stack-tag">G-code</span>
+      </div>
+
+      <div class="rule-label">What I Learned</div>
+      <div class="learned-text">Building a CNC machine teaches you where mechanical and software precision intersect. Belt backlash and step resolution decide your accuracy ceiling before firmware even matters.</div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — CNC Router</span>
+    <span class="pg-footer-info">005 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 6 — PROJECT: WINCH SLED
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">04 — Project 03</span>
+    <span class="pg-num">006</span>
+  </div>
+
+  <div class="proj-header-row">
+    <div class="proj-number-label">PROJECT 03 · 2026</div>
+    <div class="proj-meta-inline">
+      <div class="proj-meta-cell"><div class="proj-meta-key">Role</div><div class="proj-meta-val">Team Lead</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Team</div><div class="proj-meta-val">3 Engineers</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Duration</div><div class="proj-meta-val">Jan – Mar 2026</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Status</div><div class="proj-meta-val">Completed</div></div>
+    </div>
+  </div>
+
+  <div class="proj-title-row">
+    <div class="proj-page-title">Winch Sled</div>
+  </div>
+
+  <div class="proj-body">
+    <div class="proj-left">
+      <div class="proj-main-img"><img src="assets/winch.jpg" alt="Winch Sled"></div>
+      <div class="proj-sub-imgs">
+        <div class="proj-sub-img"><img src="assets/winch-1.jpg" alt="Winch detail"></div>
+        <div class="proj-sub-img" style="background:#f8f8f8;"><span class="ph" style="font-size:7px;color:#ccc;">—</span></div>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">The Problem</div>
+        <p class="proj-section-text">Pull four 500g masses a height of 5ft and distance of 30m in minimum time using a 4V DC battery source, under a strict $25 budget. Speed and budget are in direct tension — higher performance motors cost more.</p>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">My Approach</div>
+        <p class="proj-section-text">Designed a 2:1 mechanical advantage pulley system to double effective force output without upgrading the motor. A flywheel stores rotational energy to sustain speed across the full 30m run. Monorail carriage built from 2×4 pine for rigidity and low friction.</p>
+      </div>
+    </div>
+
+    <div class="proj-right">
+      <div class="rule-label">At a Glance</div>
+      <ul class="glance-list">
+        <li>Pulled 4×500g masses 30m in 1.43 seconds</li>
+        <li>$23 under the $25 budget</li>
+        <li>2:1 pulley mechanical advantage system</li>
+        <li>Flywheel energy storage for consistent pull speed</li>
+        <li>Monorail carriage on 2×4 pine rail</li>
+      </ul>
+
+      <div class="rule-label">Results</div>
+      <div class="results-grid">
+        <div class="result-cell"><div class="result-val">1.43s</div><div class="result-label">Pull time (30m)</div></div>
+        <div class="result-cell"><div class="result-val">$23</div><div class="result-label">Under budget</div></div>
+        <div class="result-cell"><div class="result-val">2:1</div><div class="result-label">Mech. advantage</div></div>
+        <div class="result-cell"><div class="result-val">5 ft</div><div class="result-label">Lift height</div></div>
+      </div>
+
+      <div class="rule-label">Stack</div>
+      <div class="stack-tags">
+        <span class="stack-tag">Pulley Systems</span>
+        <span class="stack-tag">Flywheel Design</span>
+        <span class="stack-tag">DC Motor</span>
+        <span class="stack-tag">Pine Rail</span>
+      </div>
+
+      <div class="rule-label">What I Learned</div>
+      <div class="learned-text">Mechanical advantage is a cheap way to solve a power problem. Understanding the speed-force trade-off let us get a better result from a cheaper motor than trying to brute-force it with higher voltage.</div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — Winch Sled</span>
+    <span class="pg-footer-info">006 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 7 — PROJECT: KNIFE
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">05 — Project 04</span>
+    <span class="pg-num">007</span>
+  </div>
+
+  <div class="proj-header-row">
+    <div class="proj-number-label">PROJECT 04 · 2025</div>
+    <div class="proj-meta-inline">
+      <div class="proj-meta-cell"><div class="proj-meta-key">Role</div><div class="proj-meta-val">Solo Build</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Team</div><div class="proj-meta-val">1 Engineer</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Duration</div><div class="proj-meta-val">Mar – Jun 2025</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Status</div><div class="proj-meta-val">Completed</div></div>
+    </div>
+  </div>
+
+  <div class="proj-title-row">
+    <div class="proj-page-title">Knife Design &amp; Fabrication</div>
+  </div>
+
+  <div class="proj-body">
+    <div class="proj-left">
+      <div class="proj-main-img"><img src="assets/knife.jpg" alt="Finished knife"></div>
+      <div class="proj-sub-imgs">
+        <div class="proj-sub-img"><img src="assets/knife-1.jpg" alt="Knife CAD"></div>
+        <div class="proj-sub-img"><img src="assets/knife_2.jpg" alt="Heat treatment"></div>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">The Problem</div>
+        <p class="proj-section-text">Design and fabricate a fixed-blade knife with verifiable mechanical properties — hardness and bending load — while producing a finished product with real cutting performance. Everything from CAD to heat treatment to sharpening had to be done in-house.</p>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">My Approach</div>
+        <p class="proj-section-text">A2 tool steel with a high saber grind profile was modeled in SolidWorks. Full fabrication cycle: stock removal, profiling, heat treat, temper, wet-stone sharpening. Custom PLA Wa-style handle and sheath 3D printed from the SolidWorks model. Mechanical properties verified on a Universal Instron.</p>
+      </div>
+    </div>
+
+    <div class="proj-right">
+      <div class="rule-label">At a Glance</div>
+      <ul class="glance-list">
+        <li>A2 tool steel, high saber grind, 3D printed PLA handle</li>
+        <li>Heat treated and tempered to 51.5 HRC</li>
+        <li>13.65 kN maximum bending load (Instron verified)</li>
+        <li>Fastest slicing time in class — 0.79 seconds</li>
+      </ul>
+
+      <div class="rule-label">Results</div>
+      <div class="results-grid">
+        <div class="result-cell"><div class="result-val">51.5</div><div class="result-label">HRC hardness</div></div>
+        <div class="result-cell"><div class="result-val">13.65</div><div class="result-label">kN bending load</div></div>
+        <div class="result-cell"><div class="result-val">0.79s</div><div class="result-label">Slicing time (1st)</div></div>
+        <div class="result-cell"><div class="result-val">A2</div><div class="result-label">Tool steel grade</div></div>
+      </div>
+
+      <div class="rule-label">Stack</div>
+      <div class="stack-tags">
+        <span class="stack-tag">SolidWorks</span>
+        <span class="stack-tag">3D Print (PLA)</span>
+        <span class="stack-tag">Heat Treatment</span>
+        <span class="stack-tag">Universal Instron</span>
+      </div>
+
+      <div class="rule-label">What I Learned</div>
+      <div class="learned-text">Hardness and toughness trade off against each other in tool steel — the temper cycle determines where you land. Getting to 51.5 HRC without making the blade brittle required more iteration than expected.</div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — Knife Design &amp; Fabrication</span>
+    <span class="pg-footer-info">007 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 8 — PROJECT: HVAC
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">06 — Project 05</span>
+    <span class="pg-num">008</span>
+  </div>
+
+  <div class="proj-header-row">
+    <div class="proj-number-label">PROJECT 05 · 2025</div>
+    <div class="proj-meta-inline">
+      <div class="proj-meta-cell"><div class="proj-meta-key">Role</div><div class="proj-meta-val">Solo Research</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Team</div><div class="proj-meta-val">1 Engineer</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Duration</div><div class="proj-meta-val">Jan – Feb 2025</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Status</div><div class="proj-meta-val">Completed</div></div>
+    </div>
+  </div>
+
+  <div class="proj-title-row">
+    <div class="proj-page-title">HVAC Cost Modeling</div>
+  </div>
+
+  <div class="proj-body">
+    <div class="proj-left">
+      <div class="proj-main-img"><img src="assets/hvac.jpg" alt="HVAC setup"></div>
+      <div class="proj-sub-imgs">
+        <div class="proj-sub-img"><img src="assets/hvac-1.jpg" alt="Test setup"></div>
+        <div class="proj-sub-img"><img src="assets/hvac-2.jpg" alt="MATLAB output"></div>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">The Problem</div>
+        <p class="proj-section-text">How much does insulation quality actually affect the annual cost of running residential AC in California? The goal was to model that relationship using real experimental data rather than manufacturer estimates.</p>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">My Approach</div>
+        <p class="proj-section-text">Collected 1000+ data points of lux, temperature, and insulation values from a scaled box model using Vernier probing. NOAA historical temperature data for California was integrated into a MATLAB thermal model to predict annual AC cost across different insulation configurations.</p>
+      </div>
+    </div>
+
+    <div class="proj-right">
+      <div class="rule-label">At a Glance</div>
+      <ul class="glance-list">
+        <li>1000+ experimental data points collected via Vernier</li>
+        <li>MATLAB model integrating NOAA California temperature data</li>
+        <li>Compared multiple insulation configurations</li>
+        <li>Results presented as a research poster</li>
+      </ul>
+
+      <div class="rule-label">Results</div>
+      <div class="results-grid">
+        <div class="result-cell"><div class="result-val">1000+</div><div class="result-label">Data points</div></div>
+        <div class="result-cell"><div class="result-val">$0.32</div><div class="result-label">Per kWh modeled</div></div>
+        <div class="result-cell"><div class="result-val">365</div><div class="result-label">Days modeled</div></div>
+        <div class="result-cell"><div class="result-val">NOAA</div><div class="result-label">Data integrated</div></div>
+      </div>
+
+      <div class="rule-label">Stack</div>
+      <div class="stack-tags">
+        <span class="stack-tag">MATLAB</span>
+        <span class="stack-tag">Vernier DAQ</span>
+        <span class="stack-tag">NOAA Data</span>
+        <span class="stack-tag">Thermal Modeling</span>
+      </div>
+
+      <div class="rule-label">What I Learned</div>
+      <div class="learned-text">Data collection is only as useful as the filtering that comes after it. Outlier removal and noise reduction took as long as building the model — which is typical of real experimental work.</div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — HVAC Cost Modeling</span>
+    <span class="pg-footer-info">008 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 9 — PROJECT: CANDY CRUSHER
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">07 — Project 06</span>
+    <span class="pg-num">009</span>
+  </div>
+
+  <div class="proj-header-row">
+    <div class="proj-number-label">PROJECT 06 · 2025</div>
+    <div class="proj-meta-inline">
+      <div class="proj-meta-cell"><div class="proj-meta-key">Role</div><div class="proj-meta-val">Solo Design</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Team</div><div class="proj-meta-val">1 Engineer</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Duration</div><div class="proj-meta-val">Academic 2025</div></div>
+      <div class="proj-meta-cell"><div class="proj-meta-key">Status</div><div class="proj-meta-val">Designed</div></div>
+    </div>
+  </div>
+
+  <div class="proj-title-row">
+    <div class="proj-page-title">Candy Crushing Device</div>
+  </div>
+
+  <div class="proj-body">
+    <div class="proj-left">
+      <div class="proj-main-img"><img src="assets/candy.jpg" alt="Candy crushing device"></div>
+      <div class="proj-sub-imgs">
+        <div class="proj-sub-img"><img src="assets/candy-1.jpg" alt="CAD model"></div>
+        <div class="proj-sub-img"><img src="assets/candy-2.jpg" alt="Exploded view"></div>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">The Problem</div>
+        <p class="proj-section-text">Design a purely mechanical device to grind tablet candies within a defined distance constraint. The deliverable was a complete engineering drawing package — not just a working concept, but a documented design ready for fabrication.</p>
+      </div>
+      <div class="proj-section">
+        <div class="proj-section-label">My Approach</div>
+        <p class="proj-section-text">A cam-driven crushing mechanism was designed in Fusion 360 to convert rotational input into linear crushing force within the distance constraint. Full 3D assembly, exploded views, and GD&amp;T-compliant drawings were produced as the final deliverable.</p>
+      </div>
+    </div>
+
+    <div class="proj-right">
+      <div class="rule-label">At a Glance</div>
+      <ul class="glance-list">
+        <li>Cam-driven mechanical crushing mechanism</li>
+        <li>Full 3D CAD assembly in Fusion 360</li>
+        <li>Exploded views and dimensioned drawings produced</li>
+        <li>GD&amp;T callouts throughout drawing package</li>
+      </ul>
+
+      <div class="rule-label">Results</div>
+      <div class="results-grid">
+        <div class="result-cell"><div class="result-val">3D</div><div class="result-label">CAD assembly</div></div>
+        <div class="result-cell"><div class="result-val">GD&amp;T</div><div class="result-label">Drawing standard</div></div>
+        <div class="result-cell"><div class="result-val">Cam</div><div class="result-label">Mechanism type</div></div>
+        <div class="result-cell"><div class="result-val">Full</div><div class="result-label">Drawing pkg</div></div>
+      </div>
+
+      <div class="rule-label">Stack</div>
+      <div class="stack-tags">
+        <span class="stack-tag">Fusion 360</span>
+        <span class="stack-tag">GD&amp;T</span>
+        <span class="stack-tag">Cam Mechanism</span>
+        <span class="stack-tag">Engineering Drawing</span>
+      </div>
+
+      <div class="rule-label">What I Learned</div>
+      <div class="learned-text">Going from a sketch to a production-ready drawing reveals every assumption in your design. GD&amp;T forces you to think about tolerances you would otherwise ignore until assembly.</div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — Candy Crushing Device</span>
+    <span class="pg-footer-info">009 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 10 — MORE PROJECTS
+     ✏️ EDIT: update titles, descriptions, images
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">08 — More Projects</span>
+    <span class="pg-num">010</span>
+  </div>
+
+  <div class="sec-label">08</div>
+  <div class="contents-title" style="font-size:32pt; margin-bottom:0.2in;">More Projects.</div>
+
+  <div class="more-grid" style="flex:1;">
+    <div class="more-card">
+      <div class="more-card-img"><img src="assets/cooler.jpg" alt="Wooden Ice Cooler"></div>
+      <div class="more-card-cat">CAD / Personal</div>
+      <div class="more-card-title">Custom Wooden Ice Cooler</div>
+      <div class="more-card-desc">First personal CAD project. SolidWorks model with cost optimization; fabricated as a gift. Cedar construction with weatherproof hardware.</div>
+    </div>
+    <div class="more-card">
+      <div class="more-card-img"><img src="assets/carapp.jpg" alt="Car Cost Program"></div>
+      <div class="more-card-cat">Software</div>
+      <div class="more-card-title">Project Car Cost Program</div>
+      <div class="more-card-desc">Python + Tkinter desktop app with SQLite backend. Organizes $16k of cost data across 14 customers at an auto shop.</div>
+    </div>
+    <div class="more-card">
+      <div class="more-card-img"><img src="assets/bracket.jpg" alt="Evo 9 Bracket"></div>
+      <div class="more-card-cat">Reverse Engineering</div>
+      <div class="more-card-title">Rear Seat Bracket — Evo 9</div>
+      <div class="more-card-desc">Reverse-engineered discontinued bracket for a Mitsubishi Lancer Evo 9. CAD from physical measurement, fabricated via iterative 3D printing.</div>
+    </div>
+    <div class="more-card">
+      <div class="more-card-img"><img src="assets/raspi.jpg" alt="Raspberry Pi"></div>
+      <div class="more-card-cat">Embedded</div>
+      <div class="more-card-title">Raspberry Pi Visualization</div>
+      <div class="more-card-desc">MATLAB + RPi SenseHAT: gyroscope and joystick rotate displayed images on 8×8 LED display. Upright orientation maintained on user-rotated device.</div>
+    </div>
+    <div class="more-card">
+      <div class="more-card-img" style="background:#f0f0f0; border:1px solid #ddd;"><span style="font-size:8px;color:#ccc;">Add project</span></div>
+      <!-- ✏️ EDIT: add another project here or leave blank -->
+      <div class="more-card-cat">—</div>
+      <div class="more-card-title">Your Next Project</div>
+      <div class="more-card-desc">Update this card with your next project as your portfolio grows.</div>
+    </div>
+    <div class="more-card">
+      <div class="more-card-img" style="background:#f0f0f0; border:1px solid #ddd;"><span style="font-size:8px;color:#ccc;">Add project</span></div>
+      <div class="more-card-cat">—</div>
+      <div class="more-card-title">Your Next Project</div>
+      <div class="more-card-desc">Update this card with your next project as your portfolio grows.</div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — More Projects</span>
+    <span class="pg-footer-info">010 / 011</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 11 — CONTACT & SKILLS
+     ✏️ EDIT: contact details, skills
+═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="pg-header">
+    <span class="pg-header-label">09 — Contact</span>
+    <span class="pg-num">011</span>
+  </div>
+
+  <div class="contact-name">Let's talk.</div>
+  <div class="contact-tagline">Open to internships, research positions, and interesting problems.</div>
+
+  <div class="contact-two-col" style="flex:1;">
+    <div>
+      <div class="contact-info-block">
+        <div class="contact-info-title">Contact</div>
+        <!-- ✏️ EDIT: your contact details -->
+        <div class="contact-info-row"><span class="contact-info-key">Email</span><span class="contact-info-val">nikolasdinh5@gmail.com</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">Phone</span><span class="contact-info-val">909-636-7988</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">LinkedIn</span><span class="contact-info-val">linkedin.com/in/nikolas-dinh</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">Portfolio</span><span class="contact-info-val">nikolasdinh.github.io</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">Resume</span><span class="contact-info-val">nikolasdinh.github.io/resume</span></div>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-title">Education</div>
+        <div class="contact-info-row"><span class="contact-info-key">School</span><span class="contact-info-val">Cal Poly Pomona</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">Degree</span><span class="contact-info-val">B.S. Mechanical Engineering</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">GPA</span><span class="contact-info-val">3.5 / 4.0</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">Grad.</span><span class="contact-info-val">Expected 2027</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">Cert.</span><span class="contact-info-val">SolidWorks CSWP</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="skills-section">
+        <div class="skills-title">Technical Skills</div>
+        <div class="skills-grid-2">
+          <div>
+            <div class="skill-group-name">CAD &amp; Simulation</div>
+            <div class="skill-group-items">SolidWorks (CSWP)<br>ANSYS Fluid Flow Fluent<br>Fusion 360 · AutoCAD<br>OnShape</div>
+          </div>
+          <div>
+            <div class="skill-group-name">Manufacturing</div>
+            <div class="skill-group-items">3D Printing (FDM)<br>Laser Cutting<br>Welding — MIG, TIG, Stick<br>GD&amp;T · Wood Working</div>
+          </div>
+          <div style="margin-top:0.12in;">
+            <div class="skill-group-name">Programming</div>
+            <div class="skill-group-items">MATLAB<br>Python · C++<br>Arduino · Raspberry Pi</div>
+          </div>
+          <div style="margin-top:0.12in;">
+            <div class="skill-group-name">Electronics</div>
+            <div class="skill-group-items">Arduino · Raspberry Pi<br>Wiring Schematics<br>Embedded Systems</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ EDIT: add any certifications, awards, or activities -->
+      <div class="skills-section">
+        <div class="skills-title">Certifications &amp; Activities</div>
+        <div class="contact-info-row"><span class="contact-info-key">Cert.</span><span class="contact-info-val">SolidWorks CSWP</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">Club</span><span class="contact-info-val">CPP Formula SAE — Aerodynamics</span></div>
+        <div class="contact-info-row"><span class="contact-info-key">Work</span><span class="contact-info-val">Auto Mechanic Tech, Team Automotive (2019–Present)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span class="pg-footer-name">Nikolas Dinh — Engineering Portfolio</span>
+    <span class="pg-footer-info">011 / 011</span>
+  </div>
+</div>
+
+
+</body>
+</html>
